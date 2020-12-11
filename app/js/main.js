@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import {DemoPaywallController} from './demo-controller';
-import {MeteringDemo} from './metering';
-import {log} from './log';
+import { DemoPaywallController } from './demo-controller';
+import { MeteringDemo } from './metering';
+import { log } from './log';
 
 log('started');
 
@@ -118,7 +118,7 @@ function setupSmartButton(subscriptions) {
       messageTextColor: 'rgba(66, 133, 244, 0.95)',
     },
     () => {
-      subscriptions.showOffers({isClosable: true});
+      subscriptions.showOffers({ isClosable: true });
     }
   );
 }
@@ -207,7 +207,8 @@ function setupMeteringDemo(subscriptions) {
   // Handle clicks on the Metering Toast's "Subscribe" button.
   subscriptions.setOnNativeSubscribeRequest(() => {
     // Show a publisher paywall for demo purposes.
-    startFlow('showOffers');
+    console.log("hello");
+    setTimeout(() => { startFlow('showOffers'); }, 500);
   });
 
   // Handle clicks on the "Already have an account?" link within the
@@ -398,11 +399,11 @@ function startFlowAuto() {
   }
 
   if (flow == 'demoConsentRequired') {
-    startDemoController({consentRequired: true});
+    startDemoController({ consentRequired: true });
     return;
   }
   if (flow == 'demoUnknownSubscription') {
-    startDemoController({unknownSubscription: true});
+    startDemoController({ unknownSubscription: true });
     return;
   }
   if (flow === 'swgButton') {
@@ -451,7 +452,7 @@ function isGaa() {
   if (parseInt(params.gaa_ts, 16) < Date.now() / 1000) {
     console.error(
       'SwG Entitlements: The `gaa_ts` URL param should ' +
-        'contain a hex string timestamp which points to the future.'
+      'contain a hex string timestamp which points to the future.'
     );
     return false;
   }
@@ -468,8 +469,8 @@ function isGaa() {
     // This script is only logging a warning for metering demo purposes.
     console.warn(
       `SwG Entitlements: This page's referrer ("${referrer.origin}") can't ` +
-        'grant Google Article Access. Real publications should bail if this ' +
-        'referrer check fails.'
+      'grant Google Article Access. Real publications should bail if this ' +
+      'referrer check fails.'
     );
   }
 
